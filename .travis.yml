@@ -17,12 +17,12 @@ env:
 script: 
   - case $BUILD_MODE in
         standalone)
-          mkdir _build_alone && cd _build_alone && cmake .. && make && make test
+          mkdir _build_alone && cd _build_alone && cmake .. -Wno-dev && make && make test
           ;;
         slicer)
           git clone git://github.com/Slicer/Slicer.git && cd Slicer &&
           mkdir Slicer4-SuperBuild-Debug && cd Slicer4-SuperBuild-Debug &&
-          cmake .. && 
+          cmake .. -Wno-dev && 
           make &&
           cd .. &&
           mkdir _build_slicer && cd _build_slicer &&
