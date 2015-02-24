@@ -10,15 +10,24 @@ before_install:
   - sudo apt-get install -y cmake
 
 env:
-  - STANDALONE=true
-  - STANDALONE=false
+  - BUILD_MODE=standalone
+  - BUILD_MODE=slicer
 
 # Change this to your needs
 script: 
-  - mkdir _build_alone && cd _build_alone && cmake .. && make && make test
-  - cd ..
-  - git clone git://github.com/Slicer/Slicer.git && cd Slicer
-  - mkdir Slicer4-SuperBuild-Debug && cd Slicer4-SuperBuild-Debug 
-  - cmake .. && make
-  - cd ..
-  - mkdir _build_slicer && cd _build_slicer && cmake -DUKFTractography_SUPERBUILD:BOOL=OFF -DSlicer_DIR=../Slicer4-SuperBuild-Debug/Slicer-build .. && make && make test
+  - case $BUILD_MODE in
+        standalone)
+          mkdir _build_alone && cd _build_alone && cmake .. && make && make test
+          ;;
+        slicer)
+          git clone git://github.com/Slicer/Slicer.git && cd Slicer &&
+          mkdir Slicer4-SuperBuild-Debug && cd Slicer4-SuperBuild-Debug &&
+          cmake .. && make
+          cd .. &&
+          mkdir _build_slicer && cd _build_slicer &&
+          cmake -DUKFTractography_SUPERBUILD:BOOL=OFF -DSlicer_DIR=../Slicer4-SuperBuild-Debug/Slicer-build .. &&
+          make && make test
+          ;;
+      esac ;
+
+
