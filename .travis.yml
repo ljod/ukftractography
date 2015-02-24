@@ -22,7 +22,8 @@ script:
         slicer)
           git clone git://github.com/Slicer/Slicer.git && cd Slicer &&
           mkdir Slicer4-SuperBuild-Debug && cd Slicer4-SuperBuild-Debug &&
-          cmake .. && make
+          cmake .. && 
+          make &&
           cd .. &&
           mkdir _build_slicer && cd _build_slicer &&
           cmake -DUKFTractography_SUPERBUILD:BOOL=OFF -DSlicer_DIR=../Slicer4-SuperBuild-Debug/Slicer-build .. &&
