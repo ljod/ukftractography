@@ -3,4 +3,4 @@ compiler:
   - gcc
   - clang
 # Change this to your needs
-script: mkdir build && cd build && cmake ../ukftractography && make && make test
+script: mkdir build && cd build && cmake .. && make && make test
