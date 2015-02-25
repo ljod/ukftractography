@@ -17,17 +17,17 @@ env:
 script: 
   - case $BUILD_MODE in
         standalone)
-          mkdir _build_alone && cd _build_alone && cmake .. -Wno-dev && make && make test
+          mkdir _build_alone && cd _build_alone && cmake .. -Wno-dev && make -j 2 && make test
           ;;
         slicer)
           git clone git://github.com/Slicer/Slicer.git && cd Slicer &&
           mkdir Slicer4-SuperBuild-Debug && cd Slicer4-SuperBuild-Debug &&
           cmake .. -Wno-dev && 
-          make &&
+          make -j 2 &&
           cd .. &&
           mkdir _build_slicer && cd _build_slicer &&
           cmake -DUKFTractography_SUPERBUILD:BOOL=OFF -DSlicer_DIR=../Slicer4-SuperBuild-Debug/Slicer-build .. &&
-          make && make test
+          make -j 2 && make test
           ;;
       esac ;
 
